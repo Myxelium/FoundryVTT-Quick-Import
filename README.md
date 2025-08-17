@@ -1,59 +1,82 @@
-# Easy Battlemap for Foundry VTT
+## Quick Battlemap Importer
 
-This module allows you to quickly create battlemaps in Foundry VTT by simply dragging and dropping a background image and a JSON file containing wall data.
+Effortlessly turn single images or exported map data into ready‑to‑play Foundry VTT scenes. Drop an image or video for the background, optionally drop a JSON export with walls and lights, and create a complete scene in seconds.
+
+### What it is
+
+Quick Battlemap Importer is a Foundry VTT module that adds a simple "Quick import" button to the Scenes sidebar. It opens a window where you can drag and drop a background image or video and, if you have it, a JSON configuration file. The module uploads the media, applies grid settings, creates walls, lights and doors etc, and builds a new scene for you automatically.
+
+### Why it exists
+
+Setting up scenes manually can be slow: uploading backgrounds, measuring grid size, placing walls, and configuring lights. This module removes repetitive steps so you can spend more time playing and less time navigating configuration windows.
+
+
+### Inside foundry
+<img width="629" height="497" alt="image" src="https://github.com/user-attachments/assets/a848543f-7a96-439a-8897-4971cf8a4cb5" />
+<img width="538" height="422" alt="image" src="https://github.com/user-attachments/assets/d7672c2e-d241-4ced-8f6f-b5479e522287" />
+
+
+
+### The problem it solves
+
+- Converts a plain map image into a playable scene with minimal effort
+- It attempts to apply grid settings automatically from submitted image
+- Imports walls and lights from common JSON exports (ex, Dungeon Alchemist)
+- Saves time for game masters managing many scenes
+
+## Key features
+
+- Drag-and-drop panel for images, videos, and JSON configuration files
+- Automatic grid detection for images when no JSON is provided
+- Imports walls and ambient lights from supported JSON
+- Creates and activates a new scene with the uploaded background
+- Optional "No grid" toggle for gridless maps
+- GM-only quick access button in the Scenes directory
+
+## Compatibility
+
+- Foundry VTT compatibility: minimum 10, verified 12
 
 ## Installation
 
-1. In the Foundry VTT setup screen, go to "Add-on Modules" tab
+1. Open Foundry VTT and go to the "Add-on Modules" tab
 2. Click "Install Module"
-3. Paste the following URL in the "Manifest URL" field: 
-   `https://github.com/MyxeliumI/easy-battlemap/releases/latest/download/module.json`
+3. Paste this Manifest URL:
+  https://github.com/Myxelium/QuickFoundryVTT-Quick-Import/releases/latest/download/module.json
 4. Click "Install"
+
+Manual download (optional):
+
+- Download ZIP: https://github.com/Myxelium/QuickFoundryVTT-Quick-Import/releases/latest/download/quick-battlemap-importer.zip
 
 ## Usage
 
-1. Enable the module in your game world
-2. Navigate to the "Scenes" tab
-3. You'll see a new "Easy Battlemap Creator" panel
-4. Drag and drop your background image/video (jpg, png, webm, mp4) 
-5. Drag and drop your JSON file with wall data
-6. Once both files are loaded, click "Create Battlemap Scene"
+1. Enable the module in your world
+2. Open the Scenes sidebar
+3. Click the "Quick import" button (GM only)
+4. In the panel, drag and drop one of the following:
+  - Background image (png, jpg, jpeg) or video (webm, mp4)
+  - Optional JSON export with walls and lights (for example, from tools like Dungeon Alchemist or compatible Foundry exports)
+5. Optionally enable "No grid" if the map is gridless
+6. Click "Create Scene"
 
-## JSON Format
+The module uploads the media to your world, applies grid settings (auto-detected if no JSON was supplied), and creates walls and lights when present.
 
-The JSON file should contain wall data in the following format:
+## Supported inputs
 
-```json
-{
-  "walls": [
-    {
-      "c": [x1, y1, x2, y2],
-      "door": 0,
-      "move": 0,
-      "sense": 0,
-      "dir": 0,
-      "ds": 0,
-      "flags": {}
-    },
-    // ... more walls
-  ],
-  "lights": [
-    // optional light data
-  ],
-  "notes": [
-    // optional note data
-  ],
-  "tokens": [
-    // optional token data
-  ],
-  "drawings": [
-    // optional drawing data
-  ]
-}
-```
+- Media: PNG, JPG/JPEG, WEBM, MP4
+- JSON configuration: walls and ambient lights in common Foundry-compatible formats; many Dungeon Alchemist exports should work out of the box
 
-For the specific format details, refer to the [Foundry VTT REST API Relay documentation](https://github.com/ThreeHats/foundryvtt-rest-api-relay/wiki/create-POST#request-payload).
+## Notes and limitations
+
+- Grid auto-detection runs for images when no JSON is provided and may not succeed on all artwork
+- Auto-detection is intentionally skipped for videos
+- You can always create a scene with only a background; adjust grid later if needed
+
+## Credits
+
+- Author: Myxelium (https://github.com/Myxelium)
 
 ## License
 
-This module is licensed under the MIT License.
+MIT
