@@ -1,0 +1,28 @@
+{
+  "QUICKBATTLEMAP": {
+      "Ready": "Quick Battlemap module is ready",
+      "DropAreaTitle": "Quick Battlemap Importer",
+      "DropInstructions": "Drop a background image or video, and optionally a JSON file with walls",
+      "DropInstructionsMore": "If no JSON is provided, the module can try to auto-detect grid size from the image. You can also choose to create a scene with no grid.",
+      "BackgroundStatus": "Background Media",
+      "WallDataStatus": "Wall Data",
+      "CreateScene": "Create Battlemap Scene",
+      "MissingFiles": "A background image or video is required",
+      "CreatingScene": "Creating battlemap scene...",
+      "SceneCreated": "Battlemap scene created",
+      "UploadFailed": "Failed to upload background media",
+      "SceneCreationFailed": "Failed to create scene",
+      "InvalidJSON": "The JSON file could not be parsed",
+      "DefaultSceneName": "New Battlemap",
+      "ControlTitle": "Quick Battlemap Importer",
+      "Options": "Options",
+      "NoGridLabel": "Create scene with no grid",
+      "NoGridHint": "Skips applying or detecting a grid. Useful for maps without visible grid lines.",
+      "ProgressLabel": "Progress",
+      "ProgressIdle": "Waiting for files...",
+      "ProgressAnalyzing": "Analyzing image to auto-detect grid...",
+      "ProgressUploading": "Uploading background media...",
+      "ProgressNote": "Shows ongoing tasks like uploading and auto-detecting grid size.",
+      "Reset": "Reset"
+  }
+}

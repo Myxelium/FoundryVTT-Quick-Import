@@ -1,0 +1,64 @@
+/* Keep it minimal and lean on Foundry's built-in styles */
+#quick-battlemap-drop-area .window-header {
+    user-select: none;
+    cursor: move;
+}
+
+#quick-battlemap-drop-area .quick-battlemap-instructions {
+    font-style: italic;
+    margin: 0 0 0.5rem 0;
+    border-bottom: 1px solid var(--color-border-light-primary);
+}
+
+#quick-battlemap-drop-area .status-value {
+    font-weight: bold;
+}
+
+#quick-battlemap-drop-area .create-scene-button {
+    margin-left: auto;
+}
+
+/* Drag-and-drop highlight */
+#quick-battlemap-drop-area.highlight .window-content {
+    outline: 2px solid var(--color-border-highlight, #ff6400);
+    background-color: rgba(255, 100, 0, 0.08);
+}
+
+/* Spinner row */
+#quick-battlemap-drop-area .ebm-progress-row {
+    align-items: center;
+    gap: 8px;
+}
+
+#quick-battlemap-drop-area .ebm-spinner {
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary, #ff6400);
+}
+
+#quick-battlemap-drop-area .ebm-no-grid {
+    justify-content: unset !important;
+}
+
+#quick-battlemap-drop-area .ebm-no-grid input {
+    margin: 0px 0px !important;
+}
+
+#quick-battlemap-drop-area .area {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #333;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#quick-battlemap-drop-area #dropZone {
+    border: 2px dashed #bbb;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 50px;
+    text-align: center;
+    font: 21pt bold arial;
+    color: #bbb;
+}
