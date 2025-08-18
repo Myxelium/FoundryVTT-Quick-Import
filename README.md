@@ -1,3 +1,6 @@
+![GitHub Downloads (specific asset, all releases)](https://img.shields.io/github/downloads/Myxelium/FoundryVTT-Quick-Import/quick-battlemap-importer.zip)
+
+
 ## Myxelium's Battlemap Importer
 
 Effortlessly turn single images or exported map data into ready‑to‑play Foundry VTT scenes. Drop an image or video for the background, optionally drop a JSON export with walls and lights, and create a complete scene in seconds.
