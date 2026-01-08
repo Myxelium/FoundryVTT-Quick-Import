@@ -2,7 +2,7 @@
   "id": "quick-battlemap-importer",
   "title": "Myxeliums Battlemap Importer",
   "description": "Import battlemaps by simply dragging in a background image and wall/light data JSON file",
-  "version": "1.5.10",
+  "version": "1.5.11",
   "compatibility": {
     "minimum": "10",
     "verified": "13"
