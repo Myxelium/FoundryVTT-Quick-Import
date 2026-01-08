@@ -738,9 +738,10 @@ export class SceneImportController {
             }
 
             // Set Levels module scene flags for floor definitions
+            // Only set sceneLevels - let backgroundElevation default to 0
+            // This prevents the background from incorrectly hiding/showing
             await createdScene.update({
-                'flags.levels.sceneLevels': sceneLevels,
-                'flags.levels.backgroundElevation': floorElevations[0]
+                'flags.levels.sceneLevels': sceneLevels
             });
 
             this.cleanupAfterMultiFloorCreation(sceneName);

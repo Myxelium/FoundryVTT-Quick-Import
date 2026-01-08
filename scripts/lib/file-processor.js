@@ -8,7 +8,7 @@
  */
 
 /** Module identifier for console logging */
-const MODULE_LOG_PREFIX = 'Quick Battlemap Importer';
+const MODULE_LOG_PREFIX = 'Myxeliums Battlemap Importer';
 
 /**
  * @typedef {Object} ProcessedImageData

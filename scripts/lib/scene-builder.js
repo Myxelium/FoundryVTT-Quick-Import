@@ -554,7 +554,7 @@ export class SceneBuilder {
 
     /**
      * Create floor tiles for multi-floor scenes using Levels module format.
-     * Each additional floor is created as an overhead tile with proper elevation.
+     * Each additional floor is created as a tile with proper elevation.
      * 
      * @param {Scene} scene - The scene to add floor tiles to
      * @param {Array} additionalFloors - Array of floor data (excluding base floor)
@@ -582,6 +582,7 @@ export class SceneBuilder {
             const rangeTop = elevation + floorHeight * 2 - 1;
 
             // Create tile for this floor with Levels flags
+            // Using overhead: false and proper Levels flags to avoid fade/zoom behavior
             const tileData = {
                 texture: {
                     src: floor.uploadedPath
@@ -590,14 +591,17 @@ export class SceneBuilder {
                 y: 0,
                 width: baseDimensions.width || scene.width,
                 height: baseDimensions.height || scene.height,
-                overhead: true,
+                overhead: false,  // Not overhead - this is a floor tile
                 roof: false,
-                occlusion: { mode: 1 }, // Levels uses occlusion mode 1
+                occlusion: { mode: 0 }, // No occlusion - controlled by Levels
                 elevation: elevation,
-                sort: 1000 + (i * 100),
+                sort: 100 + (i * 10),  // Lower sort order for floor tiles
                 flags: {
                     levels: {
-                        rangeTop: rangeTop
+                        rangeTop: rangeTop,
+                        showIfAbove: false,  // Don't show when above this floor
+                        noCollision: true,   // No 3D collision for floor tiles
+                        noFogHide: true      // Don't hide in fog
                     }
                 }
             };

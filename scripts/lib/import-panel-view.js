@@ -19,7 +19,7 @@
 
 /** CSS selectors for frequently accessed elements */
 const PANEL_SELECTORS = {
-    PANEL_ROOT: '#quick-battlemap-drop-area',
+    PANEL_ROOT: '#myxeliums-battlemap-drop-area',
     CREATE_BUTTON: '.create-scene-button',
     RESET_BUTTON: '.reset-button',
     CLOSE_BUTTON: '.header-button.close',
@@ -35,7 +35,7 @@ const PANEL_SELECTORS = {
 };
 
 /** LocalStorage key for persisting no-grid preference */
-const NO_GRID_STORAGE_KEY = 'quick-battlemap:no-grid';
+const NO_GRID_STORAGE_KEY = 'myxeliums-battlemap:no-grid';
 
 /**
  * View class that manages the import panel DOM and user interactions.
@@ -83,7 +83,7 @@ export class ImportPanelView {
         }
 
         // Remove any existing panel to prevent duplicates
-        const existingPanel = document.getElementById('quick-battlemap-drop-area');
+        const existingPanel = document.getElementById('myxeliums-battlemap-drop-area');
         if (existingPanel) {
             existingPanel.remove();
         }
@@ -138,7 +138,7 @@ export class ImportPanelView {
         ` : '';
 
         return `
-        <div id="quick-battlemap-drop-area" class="qbi-panel">
+        <div id="myxeliums-battlemap-drop-area" class="qbi-panel">
             <header class="qbi-header">
                 <div class="qbi-header-title">
                     <i class="fas fa-map qbi-header-icon"></i>
@@ -378,7 +378,7 @@ export class ImportPanelView {
      * @returns {HTMLElement|null} The panel element
      */
     getPanelElement() {
-        return document.getElementById('quick-battlemap-drop-area');
+        return document.getElementById('myxeliums-battlemap-drop-area');
     }
 
     /**

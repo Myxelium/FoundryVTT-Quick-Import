@@ -183,12 +183,61 @@ export class SceneDataNormalizer {
 
     /**
      * Normalize an array of wall data to Foundry's Wall document format.
+     * Filters out regular walls that share exact coordinates with doors to prevent
+     * duplicate walls blocking door functionality.
      * 
      * @param {Array} wallsArray - Array of raw wall data objects
      * @returns {NormalizedWallData[]} Array of normalized wall documents
      */
     normalizeWallsData(wallsArray) {
-        return wallsArray.map(wall => this.normalizeWall(wall));
+        const normalizedWalls = wallsArray.map(wall => this.normalizeWall(wall));
+        return this.filterDuplicateWallsAtDoorLocations(normalizedWalls);
+    }
+
+    /**
+     * Filter out regular walls that have the same coordinates as doors.
+     * Some map exports include both a wall segment and a door at the same location,
+     * which causes the door to be blocked by the overlapping wall.
+     * 
+     * @param {NormalizedWallData[]} walls - Array of normalized wall data
+     * @returns {NormalizedWallData[]} Filtered array with duplicate walls removed
+     */
+    filterDuplicateWallsAtDoorLocations(walls) {
+        // Collect coordinates of all doors
+        const doorCoordinates = new Set();
+        
+        for (const wall of walls) {
+            if (wall.door > 0 && Array.isArray(wall.c) && wall.c.length >= 4) {
+                // Store both forward and reverse coordinate strings to handle different orderings
+                const coordKey = wall.c.slice(0, 4).join(',');
+                const reverseKey = [wall.c[2], wall.c[3], wall.c[0], wall.c[1]].join(',');
+                doorCoordinates.add(coordKey);
+                doorCoordinates.add(reverseKey);
+            }
+        }
+
+        // If no doors, return walls as-is
+        if (doorCoordinates.size === 0) {
+            return walls;
+        }
+
+        // Filter out regular walls (door === 0) that share coordinates with doors
+        return walls.filter(wall => {
+            // Keep all doors
+            if (wall.door > 0) {
+                return true;
+            }
+
+            // Check if this regular wall overlaps with a door location
+            if (Array.isArray(wall.c) && wall.c.length >= 4) {
+                const coordKey = wall.c.slice(0, 4).join(',');
+                if (doorCoordinates.has(coordKey)) {
+                    return false; // Remove this wall - there's a door here
+                }
+            }
+
+            return true;
+        });
     }
 
     /**
@@ -199,16 +248,22 @@ export class SceneDataNormalizer {
      */
     normalizeWall(wall) {
         const restrictionTypes = this.getWallRestrictionTypes();
+        const doorType = this.ensureFiniteNumber(wall.door, 0);
+        
+        // Doors should default to NORMAL restrictions (blocking) when closed,
+        // while regular walls default to NONE (the source data usually specifies restrictions)
+        const isDoor = doorType > 0;
+        const defaultRestriction = isDoor ? restrictionTypes.NORMAL : restrictionTypes.NONE;
 
         return {
             c: this.normalizeWallCoordinates(wall.c),
-            door: this.ensureFiniteNumber(wall.door, 0),
+            door: doorType,
             ds: this.ensureFiniteNumber(wall.ds, 0),
             dir: this.ensureFiniteNumber(wall.dir, 0),
-            move: this.parseRestrictionValue(wall.move, restrictionTypes.NONE, restrictionTypes),
-            sound: this.parseRestrictionValue(wall.sound, restrictionTypes.NONE, restrictionTypes),
-            sight: this.parseRestrictionValue(wall.sense ?? wall.sight, restrictionTypes.NONE, restrictionTypes),
-            light: this.parseRestrictionValue(wall.light, restrictionTypes.NONE, restrictionTypes),
+            move: this.parseRestrictionValue(wall.move, defaultRestriction, restrictionTypes),
+            sound: this.parseRestrictionValue(wall.sound, defaultRestriction, restrictionTypes),
+            sight: this.parseRestrictionValue(wall.sense ?? wall.sight, defaultRestriction, restrictionTypes),
+            light: this.parseRestrictionValue(wall.light, defaultRestriction, restrictionTypes),
             flags: wall.flags ?? {}
         };
     }

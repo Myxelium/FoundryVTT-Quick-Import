@@ -1,8 +1,8 @@
 {
   "QUICKBATTLEMAP": {
-      "Ready": "Quick Battlemap module is ready",
-      "DropAreaTitle": "Quick Battlemap Importer",
-      "DropInstructions": "Drop background images/videos and optionally JSON files with walls",
+      "Ready": "Myxeliums Battlemap Importer is ready",
+      "DropAreaTitle": "Myxeliums Battlemap Importer",
+      "DropInstructions": "Drop background images/videos and optionally JSON files with wall/light data here to create battlemap scenes.",
       "DropInstructionsMore": "Multiple files can be dropped to create multi-floor scenes (requires Levels module). Files with matching names will be paired automatically.",
       "BackgroundStatus": "Background Media",
       "WallDataStatus": "Wall Data",
@@ -15,7 +15,7 @@
       "SceneCreationFailed": "Failed to create scene",
       "InvalidJSON": "The JSON file could not be parsed",
       "DefaultSceneName": "New Battlemap",
-      "ControlTitle": "Quick Battlemap Importer",
+      "ControlTitle": "Myxeliums Battlemap Importer",
       "Options": "Options",
       "NoGridLabel": "Create scene with no grid",
       "NoGridHint": "Skips applying or detecting a grid. Useful for maps without visible grid lines.",

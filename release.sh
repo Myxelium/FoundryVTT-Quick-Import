@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Release script for Quick Battlemap Importer
+# Release script for Myxeliums Battlemap Importer
 # Increments version in module.json and creates a release zip
 
 set -e
 
 MODULE_FILE="module.json"
-ZIP_NAME="quick-battlemap-importer.zip"
+ZIP_NAME="myxeliums-battlemap-importer.zip"
 
 # Check if module.json exists
 if [ ! -f "$MODULE_FILE" ]; then

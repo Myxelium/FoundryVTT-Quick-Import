@@ -1,4 +1,4 @@
-![GitHub Downloads (specific asset, all releases)](https://img.shields.io/github/downloads/Myxelium/FoundryVTT-Quick-Import/quick-battlemap-importer.zip)
+![GitHub Downloads (specific asset, all releases)](https://img.shields.io/github/downloads/Myxelium/FoundryVTT-Quick-Import/myxeliums-battlemap-importer.zip)
 
 
 ## Myxelium's Battlemap Importer
@@ -7,7 +7,7 @@ Effortlessly turn single images or exported map data into ready‑to‑play Foun
 
 ### What it is
 
-Quick Battlemap Importer is a Foundry VTT module that adds a simple "Quick import" button to the Scenes sidebar. It opens a window where you can drag and drop a background image or video and, if you have it, a JSON configuration file. The module uploads the media, applies grid settings, creates walls, lights and doors etc, and builds a new scene for you automatically.
+Myxeliums Battlemap Importer is a Foundry VTT module that adds a simple "Quick import" button to the Scenes sidebar. It opens a window where you can drag and drop a background image or video and, if you have it, a JSON configuration file. The module uploads the media, applies grid settings, creates walls, lights and doors etc, and builds a new scene for you automatically.
 
 ### Why it exists
 
@@ -15,8 +15,8 @@ Setting up scenes manually can be slow: uploading backgrounds, measuring grid si
 
 
 ### Inside foundry
-<img width="629" height="497" alt="image" src="https://github.com/user-attachments/assets/a848543f-7a96-439a-8897-4971cf8a4cb5" />
-<img width="538" height="422" alt="image" src="https://github.com/user-attachments/assets/d7672c2e-d241-4ced-8f6f-b5479e522287" />
+<img width="629" height="497" alt="image" src="./images/importer.png" />
+<img width="538" height="422" alt="image" src="./images/image1.png" />
 
 
 
@@ -38,7 +38,7 @@ Setting up scenes manually can be slow: uploading backgrounds, measuring grid si
 
 ## Compatibility
 
-- Foundry VTT compatibility: minimum 10, verified 12
+- Foundry VTT compatibility: minimum 12, verified 13
 
 ## Installation
 
@@ -50,7 +50,7 @@ Setting up scenes manually can be slow: uploading backgrounds, measuring grid si
 
 Manual download (optional):
 
-- Download ZIP: https://github.com/Myxelium/FoundryVTT-Quick-Import/releases/latest/download/quick-battlemap-importer.zip
+- Download ZIP: https://github.com/Myxelium/FoundryVTT-Quick-Import/releases/latest/download/myxeliums-battlemap-importer.zip
 
 ## Usage
 
@@ -79,7 +79,3 @@ The module uploads the media to your world, applies grid settings (auto-detected
 ## Credits
 
 - Author: Myxelium (https://github.com/Myxelium)
-
-## License
-
-MIT
