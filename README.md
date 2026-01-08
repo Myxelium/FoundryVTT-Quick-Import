@@ -45,12 +45,12 @@ Setting up scenes manually can be slow: uploading backgrounds, measuring grid si
 1. Open Foundry VTT and go to the "Add-on Modules" tab
 2. Click "Install Module"
 3. Paste this Manifest URL:
-  https://github.com/Myxelium/QuickFoundryVTT-Quick-Import/releases/latest/download/module.json
+  https://github.com/Myxelium/FoundryVTT-Quick-Import/releases/latest/download/module.json
 4. Click "Install"
 
 Manual download (optional):
 
-- Download ZIP: https://github.com/Myxelium/QuickFoundryVTT-Quick-Import/releases/latest/download/quick-battlemap-importer.zip
+- Download ZIP: https://github.com/Myxelium/FoundryVTT-Quick-Import/releases/latest/download/quick-battlemap-importer.zip
 
 ## Usage
 

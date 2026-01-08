@@ -1,50 +1,139 @@
-import {
-    QuickBattlemapDropHandler
-} from './lib/drop-handler.js';
+/**
+ * Quick Battlemap Importer - Main Entry Point
+ * 
+ * This module provides a streamlined way to import battlemaps into Foundry VTT.
+ * It adds a "Quick import" button to the Scenes sidebar that opens a drag-and-drop
+ * panel for creating scenes from images/videos and optional JSON configuration files.
+ * 
+ * @module QuickBattlemap
+ * @author Myxelium
+ * @license MIT
+ */
 
-let quickBattlemapDropHandlerInstance = null;
+import { SceneImportController } from './lib/scene-import-controller.js';
 
+/** @type {SceneImportController|null} Singleton instance of the import controller */
+let sceneImportController = null;
+
+/**
+ * Module identifier used for logging and namespacing
+ * @constant {string}
+ */
+const MODULE_ID = 'Quick Battlemap';
+
+/**
+ * CSS class name for the quick import button to prevent duplicate insertion
+ * @constant {string}
+ */
+const QUICK_IMPORT_BUTTON_CLASS = 'quick-battlemap-quick-import';
+
+/**
+ * Initialize the module when Foundry is ready.
+ * Sets up the import controller and registers necessary handlers.
+ */
 Hooks.once('init', async function () {
-    console.log('Quick Battlemap | Initializing Quick Battlemap');
+    console.log(`${MODULE_ID} | Initializing module`);
 });
 
+/**
+ * Complete module setup after Foundry is fully loaded.
+ * Creates the controller instance and displays a ready notification.
+ */
 Hooks.once('ready', async function () {
-    console.log('Quick Battlemap | Ready');
+    console.log(`${MODULE_ID} | Module ready`);
 
-    quickBattlemapDropHandlerInstance = new QuickBattlemapDropHandler();
-    quickBattlemapDropHandlerInstance.registerDropHandler();
+    sceneImportController = new SceneImportController();
+    sceneImportController.initialize();
 
     ui.notifications.info(game.i18n.localize("QUICKBATTLEMAP.Ready"));
 });
 
+/**
+ * Add the "Quick import" button to the Scenes directory header.
+ * This hook fires whenever the SceneDirectory is rendered.
+ * 
+ * @param {Application} _app - The SceneDirectory application instance (unused)
+ * @param {jQuery|HTMLElement} html - The rendered HTML element
+ */
 Hooks.on('renderSceneDirectory', (_app, html) => {
-    if (!game.user?.isGM) 
-      return;
+    // Only GMs can use the quick import feature
+    if (!game.user?.isGM) {
+        return;
+    }
 
-    const root = html?.[0] || html?.element || html;
+    // Handle different HTML element formats across Foundry versions
+    const rootElement = html?.[0] || html?.element || html;
     
-    if (!(root instanceof HTMLElement)) 
-      return;
+    if (!(rootElement instanceof HTMLElement)) {
+        return;
+    }
 
-    if (root.querySelector('button.quick-battlemap-quick-import')) 
-      return;
+    // Prevent adding duplicate buttons
+    const existingButton = rootElement.querySelector(`button.${QUICK_IMPORT_BUTTON_CLASS}`);
+    if (existingButton) {
+        return;
+    }
 
-    const container =
-        root.querySelector('.header-actions') ||
-        root.querySelector('.action-buttons') ||
-        root.querySelector('.directory-header');
+    // Find a suitable container for the button
+    const buttonContainer = findButtonContainer(rootElement);
+    if (!buttonContainer) {
+        return;
+    }
 
-    if (!container) 
-      return;
+    // Create and append the quick import button
+    const quickImportButton = createQuickImportButton();
+    buttonContainer.appendChild(quickImportButton);
+});
 
+/**
+ * Find a suitable container element for the quick import button.
+ * Tries multiple selectors for compatibility across Foundry versions.
+ * 
+ * @param {HTMLElement} rootElement - The root element to search within
+ * @returns {HTMLElement|null} The container element or null if not found
+ */
+function findButtonContainer(rootElement) {
+    const containerSelectors = [
+        '.header-actions',
+        '.action-buttons',
+        '.directory-header'
+    ];
+
+    for (const selector of containerSelectors) {
+        const container = rootElement.querySelector(selector);
+        if (container) {
+            return container;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Create the quick import button element with icon and click handler.
+ * 
+ * @returns {HTMLButtonElement} The configured button element
+ */
+function createQuickImportButton() {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'quick-battlemap-quick-import';
+    button.className = QUICK_IMPORT_BUTTON_CLASS;
     button.innerHTML = '<i class="fas fa-map"></i> <span>Quick import</span>';
-    button.addEventListener('click', () => {
-        if (!quickBattlemapDropHandlerInstance) quickBattlemapDropHandlerInstance = new QuickBattlemapDropHandler();
-        quickBattlemapDropHandlerInstance.showPanel();
-    });
+    
+    button.addEventListener('click', handleQuickImportClick);
 
-    container.appendChild(button);
-});
+    return button;
+}
+
+/**
+ * Handle click events on the quick import button.
+ * Creates the controller if needed and shows the import panel.
+ */
+function handleQuickImportClick() {
+    if (!sceneImportController) {
+        sceneImportController = new SceneImportController();
+        sceneImportController.initialize();
+    }
+    
+    sceneImportController.showImportPanel();
+}

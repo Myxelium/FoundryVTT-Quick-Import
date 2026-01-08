@@ -1,64 +1,744 @@
-/* Keep it minimal and lean on Foundry's built-in styles */
-#quick-battlemap-drop-area .window-header {
-    user-select: none;
-    cursor: move;
+/* ==========================================================================
+   Quick Battlemap Importer - Modern Panel Styles
+   ========================================================================== */
+
+/* Quick Import Button (Foundry sidebar) - Keep original styling */
+button.quick-battlemap-quick-import {
+	flex: 0 0 auto;
 }
 
-#quick-battlemap-drop-area .quick-battlemap-instructions {
-    font-style: italic;
-    margin: 0 0 0.5rem 0;
-    border-bottom: 1px solid var(--color-border-light-primary);
+/* CSS Custom Properties */
+:root {
+	--qbi-primary: #7c3aed;
+	--qbi-primary-hover: #6d28d9;
+	--qbi-primary-light: rgba(124, 58, 237, 0.1);
+	--qbi-success: #10b981;
+	--qbi-success-bg: rgba(16, 185, 129, 0.1);
+	--qbi-error: #ef4444;
+	--qbi-error-bg: rgba(239, 68, 68, 0.1);
+	--qbi-warning: #f59e0b;
+	--qbi-bg-dark: #1a1a2e;
+	--qbi-bg-card: #16213e;
+	--qbi-bg-elevated: #1f2b4d;
+	--qbi-border: rgba(255, 255, 255, 0.08);
+	--qbi-border-light: rgba(255, 255, 255, 0.12);
+	--qbi-text: #e2e8f0;
+	--qbi-text-muted: #94a3b8;
+	--qbi-text-dim: #64748b;
+	--qbi-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+	--qbi-shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+	--qbi-radius: 12px;
+	--qbi-radius-sm: 8px;
+	--qbi-radius-xs: 6px;
+	--qbi-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#quick-battlemap-drop-area .status-value {
-    font-weight: bold;
+/* Panel Container */
+.qbi-panel {
+	position: absolute;
+	left: 72px;
+	top: 80px;
+	z-index: 100;
+	display: none;
+	width: 420px;
+	background: var(--qbi-bg-dark);
+	border-radius: var(--qbi-radius);
+	box-shadow: var(--qbi-shadow);
+	border: 1px solid var(--qbi-border);
+	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		sans-serif;
+	overflow: hidden;
 }
 
-#quick-battlemap-drop-area .create-scene-button {
-    margin-left: auto;
+/* Header */
+.qbi-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 20px;
+	background: linear-gradient(
+		135deg,
+		var(--qbi-bg-elevated) 0%,
+		var(--qbi-bg-card) 100%
+	);
+	border-bottom: 1px solid var(--qbi-border);
+	cursor: move;
+	user-select: none;
 }
 
-/* Drag-and-drop highlight */
-#quick-battlemap-drop-area.highlight .window-content {
-    outline: 2px solid var(--color-border-highlight, #ff6400);
-    background-color: rgba(255, 100, 0, 0.08);
+.qbi-header-title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
-/* Spinner row */
-#quick-battlemap-drop-area .ebm-progress-row {
-    align-items: center;
-    gap: 8px;
+.qbi-header-icon {
+	font-size: 18px;
+	color: var(--qbi-primary);
 }
 
-#quick-battlemap-drop-area .ebm-spinner {
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-primary, #ff6400);
+.qbi-header h4 {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--qbi-text);
+	letter-spacing: -0.01em;
 }
 
-#quick-battlemap-drop-area .ebm-no-grid {
-    justify-content: unset !important;
+.qbi-close-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: var(--qbi-radius-xs);
+	color: var(--qbi-text-muted);
+	cursor: pointer;
+	transition: all var(--qbi-transition);
 }
 
-#quick-battlemap-drop-area .ebm-no-grid input {
-    margin: 0px 0px !important;
+.qbi-close-btn:hover {
+	background: rgba(239, 68, 68, 0.2);
+	color: var(--qbi-error);
 }
 
-#quick-battlemap-drop-area .area {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #333;
-    background: rgba(0, 0, 0, 0.7);
+/* Content */
+.qbi-content {
+	padding: 20px;
 }
 
-#quick-battlemap-drop-area #dropZone {
-    border: 2px dashed #bbb;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    padding: 50px;
-    text-align: center;
-    font: 21pt bold arial;
-    color: #bbb;
+.qbi-content form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+/* Instructions */
+.qbi-instructions {
+	margin: 0;
+	font-size: 13px;
+	color: var(--qbi-text-muted);
+	line-height: 1.5;
+}
+
+.qbi-instructions-secondary {
+	font-size: 12px;
+	color: var(--qbi-text-dim);
+	padding-top: 4px;
+	border-top: 1px solid var(--qbi-border);
+}
+
+/* Drop Zone */
+.qbi-dropzone {
+	position: relative;
+	border: 2px dashed var(--qbi-border-light);
+	border-radius: var(--qbi-radius-sm);
+	background: linear-gradient(
+		135deg,
+		rgba(124, 58, 237, 0.03) 0%,
+		rgba(16, 213, 238, 0.03) 100%
+	);
+	transition: all var(--qbi-transition);
+}
+
+.qbi-dropzone:hover {
+	border-color: var(--qbi-primary);
+	background: var(--qbi-primary-light);
+}
+
+.qbi-dropzone-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 32px 20px;
+	gap: 8px;
+}
+
+.qbi-dropzone-icon {
+	font-size: 32px;
+	color: var(--qbi-primary);
+	opacity: 0.8;
+	transition: all var(--qbi-transition);
+}
+
+.qbi-dropzone:hover .qbi-dropzone-icon {
+	opacity: 1;
+	transform: translateY(-2px);
+}
+
+.qbi-dropzone-text {
+	font-size: 15px;
+	font-weight: 500;
+	color: var(--qbi-text);
+}
+
+.qbi-dropzone-hint {
+	font-size: 12px;
+	color: var(--qbi-text-dim);
+}
+
+/* Highlight state when dragging */
+.qbi-panel.highlight .qbi-dropzone {
+	border-color: var(--qbi-primary);
+	background: var(--qbi-primary-light);
+	box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+}
+
+.qbi-panel.highlight .qbi-dropzone-icon {
+	color: var(--qbi-primary);
+	opacity: 1;
+	animation: qbi-bounce 0.6s ease infinite;
+}
+
+@keyframes qbi-bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-4px);
+	}
+}
+
+/* Status Grid */
+.qbi-status-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.qbi-status-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 14px;
+	background: var(--qbi-bg-card);
+	border-radius: var(--qbi-radius-sm);
+	border: 1px solid var(--qbi-border);
+	transition: all var(--qbi-transition);
+}
+
+.qbi-status-indicator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: var(--qbi-error-bg);
+	transition: all var(--qbi-transition);
+}
+
+.qbi-status-icon {
+	font-size: 16px;
+	line-height: 1;
+}
+
+.qbi-status-item:has(.status-value[data-status="complete"])
+	.qbi-status-indicator {
+	background: var(--qbi-success-bg);
+}
+
+.qbi-status-label {
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--qbi-text-muted);
+	line-height: 1.3;
+}
+
+/* Options / Checkbox */
+.qbi-options {
+	padding: 4px 0;
+}
+
+.qbi-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.qbi-checkbox-input {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.qbi-checkbox-mark {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	background: var(--qbi-bg-card);
+	border: 2px solid var(--qbi-border-light);
+	border-radius: var(--qbi-radius-xs);
+	transition: all var(--qbi-transition);
+}
+
+.qbi-checkbox-mark::after {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 6px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg) scale(0);
+	transition: transform var(--qbi-transition);
+}
+
+.qbi-checkbox-input:checked + .qbi-checkbox-mark {
+	background: var(--qbi-primary);
+	border-color: var(--qbi-primary);
+}
+
+.qbi-checkbox-input:checked + .qbi-checkbox-mark::after {
+	transform: rotate(45deg) scale(1);
+}
+
+.qbi-checkbox-input:focus + .qbi-checkbox-mark {
+	box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+}
+
+.qbi-checkbox-label {
+	font-size: 13px;
+	color: var(--qbi-text-muted);
+}
+
+/* Progress Section */
+.qbi-progress {
+	display: none;
+	padding: 14px 16px;
+	background: linear-gradient(
+		135deg,
+		rgba(124, 58, 237, 0.08) 0%,
+		rgba(124, 58, 237, 0.04) 100%
+	);
+	border-radius: var(--qbi-radius-sm);
+	border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.qbi-progress-content {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.qbi-spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	color: var(--qbi-primary);
+	font-size: 18px;
+}
+
+.qbi-progress-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	flex: 1;
+}
+
+.qbi-progress-text {
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--qbi-text);
+}
+
+.qbi-progress-note {
+	font-size: 11px;
+	color: var(--qbi-text-dim);
+	margin: 0;
+}
+
+/* Footer / Buttons */
+.qbi-footer {
+	display: flex;
+	gap: 10px;
+	padding-top: 8px;
+	border-top: 1px solid var(--qbi-border);
+	margin-top: 4px;
+}
+
+.qbi-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 10px 18px;
+	font-size: 13px;
+	font-weight: 500;
+	border-radius: var(--qbi-radius-sm);
+	border: none;
+	cursor: pointer;
+	transition: all var(--qbi-transition);
+	line-height: 1;
+}
+
+.qbi-btn i {
+	font-size: 12px;
+}
+
+.qbi-btn-secondary {
+	background: var(--qbi-bg-elevated);
+	color: var(--qbi-text-muted);
+	border: 1px solid var(--qbi-border-light);
+}
+
+.qbi-btn-secondary:hover {
+	background: var(--qbi-bg-card);
+	color: var(--qbi-text);
+	border-color: var(--qbi-border-light);
+}
+
+.qbi-btn-primary {
+	flex: 1;
+	background: linear-gradient(
+		135deg,
+		var(--qbi-primary) 0%,
+		var(--qbi-primary-hover) 100%
+	);
+	color: white;
+	box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+}
+
+.qbi-btn-primary:hover:not(:disabled) {
+	background: linear-gradient(
+		135deg,
+		var(--qbi-primary-hover) 0%,
+		#5b21b6 100%
+	);
+	box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
+	transform: translateY(-1px);
+}
+
+.qbi-btn-primary:disabled {
+	background: var(--qbi-bg-elevated);
+	color: var(--qbi-text-dim);
+	box-shadow: none;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* Status update animations */
+.qbi-status-icon {
+	transition: transform 0.3s ease;
+}
+
+.qbi-status-item:has(.status-value:not([data-status="pending"])) {
+	border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* ==========================================================================
+   Floor Management Section
+   ========================================================================== */
+
+.qbi-floor-section {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 4px;
+}
+
+.qbi-floor-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 2px;
+}
+
+.qbi-floor-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--qbi-text);
+}
+
+.qbi-floor-title i {
+	color: var(--qbi-primary);
+	font-size: 14px;
+}
+
+.qbi-floor-count {
+	font-size: 11px;
+	color: var(--qbi-text-dim);
+	background: var(--qbi-bg-card);
+	padding: 3px 8px;
+	border-radius: var(--qbi-radius-xs);
+}
+
+.qbi-floor-list {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	max-height: 200px;
+	overflow-y: auto;
+	padding: 2px;
+}
+
+.qbi-floor-list::-webkit-scrollbar {
+	width: 6px;
+}
+
+.qbi-floor-list::-webkit-scrollbar-track {
+	background: var(--qbi-bg-card);
+	border-radius: 3px;
+}
+
+.qbi-floor-list::-webkit-scrollbar-thumb {
+	background: var(--qbi-border-light);
+	border-radius: 3px;
+}
+
+.qbi-floor-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 20px;
+	color: var(--qbi-text-dim);
+	font-size: 12px;
+	background: var(--qbi-bg-card);
+	border-radius: var(--qbi-radius-sm);
+	border: 1px dashed var(--qbi-border);
+}
+
+.qbi-floor-empty i {
+	font-size: 14px;
+	opacity: 0.7;
+}
+
+/* Floor Item */
+.qbi-floor-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	background: var(--qbi-bg-card);
+	border-radius: var(--qbi-radius-sm);
+	border: 1px solid var(--qbi-border);
+	transition: all var(--qbi-transition);
+	cursor: grab;
+}
+
+.qbi-floor-item:hover {
+	border-color: var(--qbi-border-light);
+	background: var(--qbi-bg-elevated);
+}
+
+.qbi-floor-item.qbi-floor-dragging {
+	opacity: 0.5;
+	cursor: grabbing;
+}
+
+.qbi-floor-item.qbi-floor-drag-over {
+	border-color: var(--qbi-primary);
+	background: var(--qbi-primary-light);
+}
+
+.qbi-floor-drag-handle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	color: var(--qbi-text-dim);
+	cursor: grab;
+}
+
+.qbi-floor-drag-handle:active {
+	cursor: grabbing;
+}
+
+.qbi-floor-info {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.qbi-floor-name {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.qbi-floor-level {
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--qbi-primary);
+	background: var(--qbi-primary-light);
+	padding: 2px 6px;
+	border-radius: 4px;
+	white-space: nowrap;
+}
+
+.qbi-floor-filename {
+	font-size: 12px;
+	color: var(--qbi-text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.qbi-floor-json {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 11px;
+}
+
+.qbi-floor-json.has-json {
+	color: var(--qbi-success);
+}
+
+.qbi-floor-json.no-json {
+	color: var(--qbi-text-dim);
+}
+
+.qbi-floor-json i {
+	font-size: 10px;
+}
+
+.qbi-floor-actions {
+	display: flex;
+	gap: 4px;
+}
+
+.qbi-floor-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border: none;
+	background: var(--qbi-bg-elevated);
+	border-radius: var(--qbi-radius-xs);
+	color: var(--qbi-text-muted);
+	cursor: pointer;
+	transition: all var(--qbi-transition);
+	font-size: 11px;
+}
+
+.qbi-floor-btn:hover:not(:disabled) {
+	background: var(--qbi-border-light);
+	color: var(--qbi-text);
+}
+
+.qbi-floor-btn:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+.qbi-floor-btn.qbi-floor-remove:hover {
+	background: var(--qbi-error-bg);
+	color: var(--qbi-error);
+}
+
+/* Unmatched Files Section */
+.qbi-unmatched-files {
+	margin-top: 8px;
+	padding: 12px;
+	background: rgba(245, 158, 11, 0.08);
+	border-radius: var(--qbi-radius-sm);
+	border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.qbi-unmatched-header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 10px;
+	color: var(--qbi-warning);
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.qbi-unmatched-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.qbi-unmatched-group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.qbi-unmatched-label {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 11px;
+	color: var(--qbi-text-dim);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.qbi-unmatched-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 10px;
+	background: var(--qbi-bg-card);
+	border-radius: var(--qbi-radius-xs);
+}
+
+.qbi-unmatched-name {
+	font-size: 12px;
+	color: var(--qbi-text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 1;
+	margin-right: 8px;
+}
+
+.qbi-unmatched-assign {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border: none;
+	background: var(--qbi-primary-light);
+	border-radius: var(--qbi-radius-xs);
+	color: var(--qbi-primary);
+	cursor: pointer;
+	transition: all var(--qbi-transition);
+}
+
+.qbi-unmatched-assign:hover {
+	background: var(--qbi-primary);
+	color: white;
+}
+
+/* File Match Dialog Styles */
+.qbi-match-dialog-content {
+	padding: 10px 0;
+}
+
+.qbi-match-dialog-content p {
+	margin-bottom: 12px;
+	color: var(--qbi-text);
+}
+
+.qbi-floor-select {
+	width: 100%;
+	padding: 8px 12px;
+	background: var(--qbi-bg-card);
+	border: 1px solid var(--qbi-border-light);
+	border-radius: var(--qbi-radius-xs);
+	color: var(--qbi-text);
+	font-size: 13px;
 }

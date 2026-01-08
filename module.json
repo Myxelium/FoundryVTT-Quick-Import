@@ -2,10 +2,10 @@
   "id": "quick-battlemap-importer",
   "title": "Quick Battlemap Importer",
   "description": "Import battlemaps by simply dragging in a background image and wall/light data JSON file",
-  "version": "1.4.1",
+  "version": "1.5.4",
   "compatibility": {
     "minimum": "10",
-    "verified": "12"
+    "verified": "13"
   },
   "authors": [
     {
@@ -23,6 +23,6 @@
     }
   ],
   "url": "https://github.com/Myxelium/FoundryVTT-Quick-Import",
-  "manifest": "https://github.com/Myxelium/FoundryVTT-Quick-Import/releases/latest/download/module.json",
-  "download": "https://github.com/Myxelium/FoundryVTT-Quick-Import/releases/latest/download/quick-battlemap-importer.zip"
+  "manifest": "https://github.com/Myxelium/FoundryVTT-Quick-Import-Dev/releases/download/1.5.4/module.json",
+  "download": "https://github.com/Myxelium/FoundryVTT-Quick-Import-Dev/releases/download/1.5.4/quick-battlemap-importer.zip"
 }
